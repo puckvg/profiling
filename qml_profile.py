@@ -1,10 +1,9 @@
 import numpy as np
 import qml
-import sklearn
+#import sklearn
 from qml.kernels import gaussian_kernel
 from qml.math import cho_solve
-from sklearn.kernel_ridge import KernelRidge
-from sklearn.model_selection import train_test_split
+#from sklearn.kernel_ridge import KernelRidge
 
 
 def generate_dummy_data():
@@ -56,12 +55,14 @@ def predict_KRR_qml(
 
     return y_pred
 
-def main(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.33, random_state=42
-    )
+def main(X, y, test_size=0.33):
+    train_size = 1-test_size 
+    train_int = int(train_size*len(X))
+    
+    X_train, X_test = X[:train_int], X[train_int:]
+    y_train, y_test = y[:train_int], y[train_int:]
     pred_qml = predict_KRR_qml(X_test, y_test, X_train=X_train, y_train=y_train)
-    pred_sklearn = predict_KRR_sklearn(X_test, y_test, X_train=X_train, y_train=y_train)
+ #   pred_sklearn = predict_KRR_sklearn(X_test, y_test, X_train=X_train, y_train=y_train)
     return 
 
 if __name__ == "__main__":

@@ -8,8 +8,8 @@ from sklearn.model_selection import train_test_split
 
 
 def generate_dummy_data():
-    X = np.random.rand(100, 100)
-    y = np.random.rand(100)
+    X = np.random.rand(1000, 1000)
+    y = np.random.rand(1000)
 
     return X, y
 
@@ -56,11 +56,14 @@ def predict_KRR_qml(
 
     return y_pred
 
-
-if __name__ == "__main__":
-    X, y = generate_dummy_data()
+def main(X, y):
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42
     )
     pred_qml = predict_KRR_qml(X_test, y_test, X_train=X_train, y_train=y_train)
     pred_sklearn = predict_KRR_sklearn(X_test, y_test, X_train=X_train, y_train=y_train)
+    return 
+
+if __name__ == "__main__":
+    X, y = generate_dummy_data()
+    main(X,y)

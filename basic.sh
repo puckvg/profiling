@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+file=$1
 
- python -m cProfile -s tottime dummy.py
+python -m cProfile -s tottime $file
